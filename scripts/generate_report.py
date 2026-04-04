@@ -109,9 +109,12 @@ def format_points(value: float) -> str:
 def compute_status_counts(criteria_results: List[dict]) -> Dict[str, int]:
     """Retourne le comptage des statuts pour une liste de critères."""
     counts: Dict[str, int] = {"validated": 0, "partial": 0, "failed": 0, "blocking": 0}
+    allowed_statuses = set(counts)
     for c in criteria_results:
-        status = c.get("status", "failed")
-        counts[status] = counts.get(status, 0) + 1
+        status = c.get("status") or "failed"
+        if status not in allowed_statuses:
+            status = "failed"
+        counts[status] += 1
     return counts
 
 
