@@ -9,7 +9,7 @@ Référence pour la détection automatique de bad practices dans le code étudia
 | Pattern | Sévérité | Grep/détection |
 |---------|----------|----------------|
 | Credentials/API keys en dur | 🔴 Critique | `grep -rn "password\s*=\|api_key\s*=\|secret\s*="` |
-| TODO/FIXME non traités | 🟡 Moyen | `grep -rn "TODO\|FIXME\|HACK\|XXX"` |
+| TODO/FIXME non traités | 🟢 Mineur | `grep -rn "TODO\|FIXME\|HACK\|XXX"` | Ne signaler que les TODO dans des zones critiques (authentification, sécurité) |
 | Code commenté en masse | 🟡 Moyen | Blocs de `//` ou `/* */` > 5 lignes consécutives |
 | Absence de .gitignore | 🔴 Critique | `ls .gitignore` → not found |
 | node_modules / binaires commités | 🔴 Critique | `find . -name "node_modules" -type d` dans le repo |
