@@ -269,9 +269,47 @@ Aucune implémentation trouvée. Recherche sur `mot_clé` → 0 résultats.
 
 ## 💡 Recommandations pédagogiques
 
-1. **[Critique]** ...
-2. **[Important]** ...
-3. **[Conseil]** ...
+Chaque recommandation **doit** être structurée avec les trois éléments suivants :
+
+1. **Localisation précise** : indiquer le fichier exact et, si possible, la ligne ou la fonction concernée
+2. **Action concrète** : décrire précisément ce que l'étudiant doit faire (pas "corriger l'auth" mais "ajouter la vérification du token dans `src/auth/middleware.ts` ligne 45")
+3. **Exemple de code minimal** : fournir un snippet de correction de 3–10 lignes si cela aide à comprendre la correction attendue ; si un extrait de contexte plus large est nécessaire, il peut être plus long conformément aux autres consignes du template
+
+**Format à respecter pour chaque recommandation :**
+````
+### [C?] Libellé du critère
+**Fichier :** `src/chemin/vers/fichier.ts` (ligne X)
+**Action :** Description précise de ce qui doit être fait
+**Exemple :**
+```typescript
+// Avant
+const token = req.headers.authorization;  // pas de validation
+
+// Après
+const token = req.headers.authorization?.split(' ')[1];
+if (!token) return res.status(401).json({ error: 'Unauthorized' });
+```
+````
+
+**Guide de ton par statut :**
+| Statut | Ton recommandé |
+|--------|---------------|
+| 🚫 **BLOQUANT** | Direct et urgent : "Ce critère est bloquant. Sans cette correction, le projet ne peut pas être validé." |
+| ❌ **NON VALIDÉ** | Factuel et constructif : "La fonctionnalité X est absente. Voici comment l'implémenter..." |
+| ⚠️ **PARTIEL** | Encourageant et précis : "La base est là, mais il manque Y. Une petite modification suffit..." |
+| ✅ **VALIDÉ** | Confirmatif et bref : "Implémentation correcte détectée dans `fichier`. Vérifier manuellement si confiance faible." |
+
+**Exemple de recommandations structurées :**
+
+### [C1 — 🚫 BLOQUANT] Authentification JWT absente
+**Fichier :** `src/routes/api.ts` — aucun middleware d'auth détecté
+**Action :** Ajouter un middleware JWT sur toutes les routes protégées.
+**Exemple :** `router.use('/api', verifyToken);` dans `src/routes/index.ts`
+
+### [C2 — ⚠️ PARTIEL] Gestion des erreurs incomplète
+**Fichier :** `src/controllers/user.ts` (lignes 23–45)
+**Action :** Entourer les appels async d'un try/catch et retourner un statut HTTP approprié.
+**Exemple :** `try { ... } catch (e) { res.status(500).json({ error: e.message }) }`
 
 ---
 
