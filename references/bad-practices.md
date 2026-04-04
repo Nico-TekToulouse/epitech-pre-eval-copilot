@@ -127,6 +127,19 @@ Référence pour la détection automatique de bad practices dans le code étudia
 Quand le langage principal est détecté, se référer à la section correspondante.
 Pour les projets multi-langages, appliquer les sections de chaque langage présent.
 
+### Calibration selon le niveau étudiant (`student_level`)
+
+Si le paramètre `student_level` est fourni, adapter l'interprétation des sévérités comme suit :
+
+| Niveau | Sévérités à signaler | Adaptation du ton |
+|--------|----------------------|-------------------|
+| **B1** | 🔴 Critique, 🟡 Moyen uniquement — ignorer les 🟢 Mineur | Bienveillant : "c'est normal à ce stade, voici comment progresser" |
+| **B2** | Toutes les sévérités (grille standard) | Pédagogique : souligner les 🟡 Moyen comme axes d'amélioration |
+| **B3** | Toutes les sévérités — les 🟡 Moyen deviennent des signaux d'alerte | Exigeant : demander des justifications pour les patterns risqués |
+| **EIP** | Toutes les sévérités appliquées strictement | Professionnel : les 🟢 Mineurs non traités reflètent un manque de rigueur |
+
+> Si `student_level` n'est pas fourni, appliquer la grille **B2** (standard) sans mentionner le niveau.
+
 **Commandes de détection rapide :**
 ```bash
 # Détecter le langage principal
