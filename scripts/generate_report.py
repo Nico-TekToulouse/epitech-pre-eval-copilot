@@ -37,6 +37,7 @@ import argparse
 import sys
 from datetime import datetime
 from pathlib import Path
+from typing import Dict, List, Tuple
 
 try:
     from openpyxl import Workbook
@@ -82,6 +83,39 @@ POINTS_MAP = {
     "failed":    lambda r: 0,
     "blocking":  lambda r: 0,
 }
+
+ESTIMATE_MARGIN = 15
+
+
+def compute_estimate_range(points_obtained: float, points_max: float) -> Tuple[float, float]:
+    """Calcule la fourchette estimée ±ESTIMATE_MARGIN, avec bornes [0, points_max].
+
+    points_obtained est d'abord borné à [0, points_max], ce qui garantit
+    pts_min <= points_obtained <= pts_max_est sans swap supplémentaire.
+    """
+    points_max = max(0, points_max)
+    points_obtained = min(max(0, points_obtained), points_max)
+    pts_min = max(0, points_obtained - ESTIMATE_MARGIN)
+    pts_max_est = min(points_max, points_obtained + ESTIMATE_MARGIN)
+    return pts_min, pts_max_est
+
+
+def format_points(value: float) -> str:
+    """Formate un nombre de points : entier si .0, sinon 1 décimale."""
+    formatted = f"{value:.1f}"
+    return formatted[:-2] if formatted.endswith(".0") else formatted
+
+
+def compute_status_counts(criteria_results: List[dict]) -> Dict[str, int]:
+    """Retourne le comptage des statuts pour une liste de critères."""
+    counts: Dict[str, int] = {"validated": 0, "partial": 0, "failed": 0, "blocking": 0}
+    allowed_statuses = set(counts)
+    for c in criteria_results:
+        status = c.get("status") or "failed"
+        if status not in allowed_statuses:
+            status = "failed"
+        counts[status] += 1
+    return counts
 
 
 def make_fill(hex_color: str) -> PatternFill:
@@ -202,13 +236,11 @@ def build_summary_sheet(ws, data: dict, totals: dict):
 
     criteria_results = data.get("criteria_results", [])
 
-    counts = {"validated": 0, "partial": 0, "failed": 0, "blocking": 0}
+    counts = compute_status_counts(criteria_results)
     blocking_list = []
 
     for c in criteria_results:
-        status = c.get("status", "failed")
-        counts[status] = counts.get(status, 0) + 1
-        if status == "blocking":
+        if c.get("status") == "blocking":
             blocking_list.append(f"[{c.get('id','')}] {c.get('label','')}")
 
     bg = make_fill(COLORS["summary_bg"])
@@ -235,7 +267,11 @@ def build_summary_sheet(ws, data: dict, totals: dict):
     write_kv(row, "Date", data.get("date", datetime.now().strftime("%Y-%m-%d"))); row += 1
     row += 1
 
-    write_kv(row, "Score estimé", f"{totals['points_obtained']} / {totals['points_max']} pts"); row += 1
+    write_kv(row, "⚠️ Avertissement", "Ce rapport détecte des patterns, pas l'exécution."); row += 1
+    row += 1
+
+    pts_min, pts_max_est = compute_estimate_range(totals["points_obtained"], totals["points_max"])
+    write_kv(row, "Fourchette estimée", f"{format_points(pts_min)}–{format_points(pts_max_est)} pts (±{ESTIMATE_MARGIN} selon vérification manuelle)"); row += 1
     row += 1
 
     ws.cell(row=row, column=1, value="Statuts").font = bold
@@ -301,7 +337,11 @@ def main():
     wb.save(output_path)
 
     print(f"✅ Rapport Excel généré : {output_path}")
-    print(f"   Score estimé : {totals['points_obtained']} / {totals['points_max']} pts")
+    counts = compute_status_counts(criteria_results)
+    print(f"   Statuts : {counts['validated']} ✅ — {counts['partial']} ⚠️ — {counts['failed']} ❌ — {counts['blocking']} 🚫")
+    pts_min, pts_max_est = compute_estimate_range(totals["points_obtained"], totals["points_max"])
+    print(f"   Fourchette estimée : {format_points(pts_min)}–{format_points(pts_max_est)} pts (±{ESTIMATE_MARGIN} selon vérification manuelle)")
+    print("   ⚠️ Ce rapport détecte des patterns, pas l'exécution.")
 
 
 if __name__ == "__main__":
