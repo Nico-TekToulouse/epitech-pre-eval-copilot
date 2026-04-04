@@ -200,7 +200,7 @@ grep -rn "password\s*=\|api_key\s*=\|secret\s*=\|JWT_SECRET\s*=" /tmp/student-pr
 |---------|----------|-----------|
 | Absence de `set -euo pipefail` | 🟡 Moyen | Scripts sans ces options de sécurité en en-tête |
 | Variables non quotées (`$VAR` vs `"$VAR"`) | 🟡 Moyen | `grep -rn "\$[A-Z_]*[^"]"` — risque word splitting |
-| `eval` avec des données externes | 🔴 Critique | `grep -rn "\beval\b"` |
+| `eval` avec des données externes | 🔴 Critique | `grep -rnw "eval"` |
 | Absence de vérification du code de retour | 🟡 Moyen | Commandes critiques sans `|| exit 1` ou `if` |
 | Credentials en dur dans les scripts | 🔴 Critique | `grep -rn "PASSWORD=\|TOKEN=\|SECRET="` |
 | Fichiers temporaires sans `trap` de nettoyage | 🟡 Moyen | `mktemp` sans `trap ... EXIT` |
