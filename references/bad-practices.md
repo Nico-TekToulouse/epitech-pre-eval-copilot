@@ -162,7 +162,7 @@ grep -rn "password\s*=\|api_key\s*=\|secret\s*=\|JWT_SECRET\s*=" /tmp/student-pr
 | Chaînes de connexion en dur | 🔴 Critique | `grep -rn "ConnectionString\s*=\s*\""` |
 | Pas de `using` pour les ressources IDisposable | 🟡 Moyen | `new SqlConnection` sans `using` |
 | `async void` (hors event handlers) | 🔴 Critique | `grep -rn "async void"` |
-| Magic strings sans constante | �� Moyen | Chaînes littérales répétées dans la logique métier |
+| Magic strings sans constante | 🟡 Moyen | Chaînes littérales répétées dans la logique métier |
 | Accès direct aux champs publics | 🟡 Moyen | `grep -rn "public [A-Z][a-z]* [a-z]"` dans les modèles |
 
 ---
