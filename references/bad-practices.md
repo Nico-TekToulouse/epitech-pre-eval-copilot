@@ -158,7 +158,7 @@ grep -rn "password\s*=\|api_key\s*=\|secret\s*=\|JWT_SECRET\s*=" /tmp/student-pr
 | Pattern | Sévérité | Détection |
 |---------|----------|-----------|
 | `Console.WriteLine` de debug laissé | 🟢 Mineur | `grep -rn "Console\.WriteLine"` |
-| Catch vide ou `catch (Exception)` trop large | 🟡 Moyen | `grep -rn "catch (Exception\|catch {}"` |
+| Catch vide ou `catch (Exception)` trop large | 🟡 Moyen | `grep -Przn "catch\s*\(\s*Exception\s*\)|catch\s*\{\s*\}"` |
 | Chaînes de connexion en dur | 🔴 Critique | `grep -rn "ConnectionString\s*=\s*\""` |
 | Pas de `using` pour les ressources IDisposable | 🟡 Moyen | `new SqlConnection` sans `using` |
 | `async void` (hors event handlers) | 🔴 Critique | `grep -rn "async void"` |
