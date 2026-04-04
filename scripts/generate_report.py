@@ -235,7 +235,12 @@ def build_summary_sheet(ws, data: dict, totals: dict):
     write_kv(row, "Date", data.get("date", datetime.now().strftime("%Y-%m-%d"))); row += 1
     row += 1
 
-    write_kv(row, "Score estimé", f"{totals['points_obtained']} / {totals['points_max']} pts"); row += 1
+    write_kv(row, "⚠️ Avertissement", "Ce rapport détecte des patterns, pas l'exécution."); row += 1
+    row += 1
+
+    pts_min = totals["points_obtained"]
+    pts_max_est = min(totals["points_max"], totals["points_obtained"] + 15)
+    write_kv(row, "Fourchette estimée", f"{pts_min}–{pts_max_est} pts (±15 selon vérification manuelle)"); row += 1
     row += 1
 
     ws.cell(row=row, column=1, value="Statuts").font = bold
@@ -301,7 +306,15 @@ def main():
     wb.save(output_path)
 
     print(f"✅ Rapport Excel généré : {output_path}")
-    print(f"   Score estimé : {totals['points_obtained']} / {totals['points_max']} pts")
+    counts = {"validated": 0, "partial": 0, "failed": 0, "blocking": 0}
+    for c in criteria_results:
+        status = c.get("status", "failed")
+        counts[status] = counts.get(status, 0) + 1
+    print(f"   Statuts : {counts['validated']} ✅ — {counts['partial']} ⚠️ — {counts['failed']} ❌ — {counts['blocking']} 🚫")
+    pts_min = totals["points_obtained"]
+    pts_max_est = min(totals["points_max"], totals["points_obtained"] + 15)
+    print(f"   Fourchette estimée : {pts_min}–{pts_max_est} pts (±15 selon vérification manuelle)")
+    print("   ⚠️ Ce rapport détecte des patterns, pas l'exécution.")
 
 
 if __name__ == "__main__":
