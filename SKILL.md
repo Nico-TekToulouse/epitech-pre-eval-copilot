@@ -37,8 +37,8 @@ Si le paramètre `student_level` est fourni, adapter la sévérité selon le tab
 |--------|--------|------------------------------|
 | **B1** | 1ère année — débutant | Ignorer les bad practices 🟢 Mineur. Signaler uniquement 🔴 Critique et 🟡 Moyen. Ton bienveillant : "c'est normal à ce stade". |
 | **B2** | 2ème année — intermédiaire | Appliquer toutes les sévérités. Souligner les 🟡 Moyen comme axes d'amélioration prioritaires. |
-| **B3** | 3ème année — avancé | Toutes sévérités. Les 🟡 Moyen deviennent des signaux d'alerte. Exiger justifications pour les patterns risqués. |
-| **EIP** | Projet Epitech Innovation — expert | Toutes sévérités appliquées strictement. Les 🟢 Mineur non traités peuvent refléter un manque de rigueur professionnelle. |
+| **B3** | 3ème année — avancé | Toutes les sévérités. Les 🟡 Moyen deviennent des signaux d'alerte. Exiger justifications pour les patterns risqués. |
+| **EIP** | Projet Epitech Innovation — expert | Toutes les sévérités appliquées strictement. Les 🟢 Mineur non traités peuvent refléter un manque de rigueur professionnelle. |
 
 > Si `student_level` n'est pas fourni, appliquer la grille standard (B2 par défaut) sans mentionner le niveau.
 
