@@ -25,8 +25,22 @@ Si le barème ou le code source n'est pas fourni, utilise `ask_user` pour les de
 
 - **Barème** : fichier JSON uploadé, collé dans le chat, ou chemin local
 - **Code source** : URL GitHub, archive ZIP, ou chemin local
+- **Niveau étudiant** (optionnel) : `B1`, `B2`, `B3` ou `EIP` — permet de calibrer la sévérité des bad practices
 
-Ne pas supposer les deux disponibles. Attendre les réponses avant de continuer.
+Ne pas supposer les deux premiers disponibles. Attendre les réponses avant de continuer.
+
+### Calibration par niveau (`student_level`)
+
+Si le paramètre `student_level` est fourni, adapter la sévérité selon le tableau suivant :
+
+| Niveau | Profil | Adaptation des bad practices |
+|--------|--------|------------------------------|
+| **B1** | 1ère année — débutant | Ignorer les bad practices 🟢 Mineur. Signaler uniquement 🔴 Critique et 🟡 Moyen. Ton bienveillant : "c'est normal à ce stade". |
+| **B2** | 2ème année — intermédiaire | Appliquer toutes les sévérités. Souligner les 🟡 Moyen comme axes d'amélioration prioritaires. |
+| **B3** | 3ème année — avancé | Toutes sévérités. Les 🟡 Moyen deviennent des signaux d'alerte. Exiger justifications pour les patterns risqués. |
+| **EIP** | Projet Epitech Innovation — expert | Toutes sévérités appliquées strictement. Les 🟢 Mineur non traités peuvent refléter un manque de rigueur professionnelle. |
+
+> Si `student_level` n'est pas fourni, appliquer la grille standard (B2 par défaut) sans mentionner le niveau.
 
 ---
 
