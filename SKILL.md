@@ -156,6 +156,23 @@ references/bad-practices.md
 
 > **Règle du doute** : si incertain qu'un critère est rempli → classer en ⚠️ PARTIEL.
 
+### 3e. Niveau de confiance par critère
+
+Pour chaque critère analysé, attribuer un niveau de confiance **High / Medium / Low** et l'inclure dans le rapport.
+
+| Niveau | Critères | Signification |
+|--------|----------|---------------|
+| 🟢 **High** | Pattern trouvé dans le code source + tests existants détectés | L'implémentation est clairement présente et testée |
+| 🟡 **Medium** | Pattern trouvé dans le code source, mais aucun test détecté | L'implémentation existe mais non vérifiée par des tests |
+| 🔴 **Low** | Pattern ambigu, ou trouvé uniquement dans les dépendances (node_modules, vendor, etc.) | La présence réelle est incertaine, vérification manuelle indispensable |
+
+**Format d'affichage dans le rapport :**
+```
+| [C1] Authentification JWT | ✅ VALIDÉ | 🟡 Medium | Pattern trouvé dans src/auth/, pas de tests détectés |
+```
+
+> ⚠️ Un critère 🔴 **Low** en statut ✅ **VALIDÉ** doit toujours être signalé pour vérification manuelle.
+
 ---
 
 ## Étape 4 — Générer le compte rendu rapide
