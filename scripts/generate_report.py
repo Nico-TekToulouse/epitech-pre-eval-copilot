@@ -83,6 +83,21 @@ POINTS_MAP = {
     "blocking":  lambda r: 0,
 }
 
+ESTIMATE_MARGIN = 15
+
+
+def compute_estimate_range(points_obtained: float, points_max: float) -> tuple[float, float]:
+    """Calcule la fourchette estimée ±ESTIMATE_MARGIN, avec bornes [0, points_max].
+
+    points_obtained est d'abord borné à [0, points_max], ce qui garantit
+    pts_min <= points_obtained <= pts_max_est sans swap supplémentaire.
+    """
+    points_max = max(0, points_max)
+    points_obtained = min(max(0, points_obtained), points_max)
+    pts_min = max(0, points_obtained - ESTIMATE_MARGIN)
+    pts_max_est = min(points_max, points_obtained + ESTIMATE_MARGIN)
+    return pts_min, pts_max_est
+
 
 def make_fill(hex_color: str) -> PatternFill:
     return PatternFill("solid", fgColor=hex_color)
@@ -238,9 +253,8 @@ def build_summary_sheet(ws, data: dict, totals: dict):
     write_kv(row, "⚠️ Avertissement", "Ce rapport détecte des patterns, pas l'exécution."); row += 1
     row += 1
 
-    pts_min = totals["points_obtained"]
-    pts_max_est = min(totals["points_max"], totals["points_obtained"] + 15)
-    write_kv(row, "Fourchette estimée", f"{pts_min}–{pts_max_est} pts (±15 selon vérification manuelle)"); row += 1
+    pts_min, pts_max_est = compute_estimate_range(totals["points_obtained"], totals["points_max"])
+    write_kv(row, "Fourchette estimée", f"{pts_min}–{pts_max_est} pts (±{ESTIMATE_MARGIN} selon vérification manuelle)"); row += 1
     row += 1
 
     ws.cell(row=row, column=1, value="Statuts").font = bold
@@ -311,9 +325,8 @@ def main():
         status = c.get("status", "failed")
         counts[status] = counts.get(status, 0) + 1
     print(f"   Statuts : {counts['validated']} ✅ — {counts['partial']} ⚠️ — {counts['failed']} ❌ — {counts['blocking']} 🚫")
-    pts_min = totals["points_obtained"]
-    pts_max_est = min(totals["points_max"], totals["points_obtained"] + 15)
-    print(f"   Fourchette estimée : {pts_min}–{pts_max_est} pts (±15 selon vérification manuelle)")
+    pts_min, pts_max_est = compute_estimate_range(totals["points_obtained"], totals["points_max"])
+    print(f"   Fourchette estimée : {pts_min}–{pts_max_est} pts (±{ESTIMATE_MARGIN} selon vérification manuelle)")
     print("   ⚠️ Ce rapport détecte des patterns, pas l'exécution.")
 
 
