@@ -240,20 +240,20 @@ Chaque recommandation **doit** être structurée avec les trois éléments suiva
 3. **Exemple de code minimal** : fournir un snippet de 3–10 lignes si cela aide à comprendre la correction attendue
 
 **Format à respecter pour chaque recommandation :**
-```
+````
 ### [C?] Libellé du critère
 **Fichier :** `src/chemin/vers/fichier.ts` (ligne X)
 **Action :** Description précise de ce qui doit être fait
 **Exemple :**
-\`\`\`typescript
+```typescript
 // Avant
 const token = req.headers.authorization;  // pas de validation
 
 // Après
 const token = req.headers.authorization?.split(' ')[1];
 if (!token) return res.status(401).json({ error: 'Unauthorized' });
-\`\`\`
 ```
+````
 
 **Guide de ton par statut :**
 | Statut | Ton recommandé |
@@ -264,17 +264,16 @@ if (!token) return res.status(401).json({ error: 'Unauthorized' });
 | ✅ **VALIDÉ** | Confirmatif et bref : "Implémentation correcte détectée dans `fichier`. Vérifier manuellement si confiance Low." |
 
 **Exemple de recommandations structurées :**
-```markdown
-1. **[Critique — 🚫 BLOQUANT]** Authentification JWT absente
-   - **Fichier :** `src/routes/api.ts` — aucun middleware d'auth détecté
-   - **Action :** Ajouter un middleware JWT sur toutes les routes protégées
-   - **Exemple :** `router.use('/api', verifyToken);` dans `src/routes/index.ts`
 
-2. **[Important — ⚠️ PARTIEL]** Gestion des erreurs incomplète
-   - **Fichier :** `src/controllers/user.ts` (lignes 23–45)
-   - **Action :** Entourer les appels async d'un try/catch et retourner un status HTTP approprié
-   - **Exemple :** Ajouter `try { ... } catch (e) { res.status(500).json({ error: e.message }) }`
-```
+### [C1 — 🚫 BLOQUANT] Authentification JWT absente
+**Fichier :** `src/routes/api.ts` — aucun middleware d'auth détecté
+**Action :** Ajouter un middleware JWT sur toutes les routes protégées.
+**Exemple :** `router.use('/api', verifyToken);` dans `src/routes/index.ts`
+
+### [C2 — ⚠️ PARTIEL] Gestion des erreurs incomplète
+**Fichier :** `src/controllers/user.ts` (lignes 23–45)
+**Action :** Entourer les appels async d'un try/catch et retourner un statut HTTP approprié.
+**Exemple :** `try { ... } catch (e) { res.status(500).json({ error: e.message }) }`
 
 ---
 
