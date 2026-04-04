@@ -237,7 +237,7 @@ Chaque recommandation **doit** être structurée avec les trois éléments suiva
 
 1. **Localisation précise** : indiquer le fichier exact et, si possible, la ligne ou la fonction concernée
 2. **Action concrète** : décrire précisément ce que l'étudiant doit faire (pas "corriger l'auth" mais "ajouter la vérification du token dans `src/auth/middleware.ts` ligne 45")
-3. **Exemple de code minimal** : fournir un snippet de 3–10 lignes si cela aide à comprendre la correction attendue
+3. **Exemple de code minimal** : fournir un snippet de correction de 3–10 lignes si cela aide à comprendre la correction attendue ; si un extrait de contexte plus large est nécessaire, il peut être plus long conformément aux autres consignes du template
 
 **Format à respecter pour chaque recommandation :**
 ````
