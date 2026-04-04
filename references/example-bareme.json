@@ -1,0 +1,70 @@
+{
+  "project": "API REST Node.js — Gestion utilisateurs",
+  "total_points": 50,
+  "criteria": [
+    {
+      "id": "C1",
+      "label": "Le projet démarre sans erreur (npm start / npm run dev)",
+      "points": 5,
+      "category": "fonctionnel",
+      "mandatory": true,
+      "hints": ["package.json", "index.ts", "app.ts", "server.ts"]
+    },
+    {
+      "id": "C2",
+      "label": "Route POST /auth/register fonctionnelle avec validation des champs",
+      "points": 8,
+      "category": "fonctionnel",
+      "mandatory": true,
+      "hints": ["routes/auth", "controllers/auth", "register"]
+    },
+    {
+      "id": "C3",
+      "label": "Route POST /auth/login avec génération de JWT",
+      "points": 8,
+      "category": "fonctionnel",
+      "mandatory": true,
+      "hints": ["login", "jwt", "token", "jsonwebtoken"]
+    },
+    {
+      "id": "C4",
+      "label": "Middleware d'authentification JWT sur les routes protégées",
+      "points": 7,
+      "category": "sécurité",
+      "mandatory": true,
+      "hints": ["middleware", "auth", "verify", "Bearer"]
+    },
+    {
+      "id": "C5",
+      "label": "Les mots de passe sont hashés (bcrypt ou équivalent)",
+      "points": 5,
+      "category": "sécurité",
+      "mandatory": true,
+      "hints": ["bcrypt", "hash", "argon2", "crypto"]
+    },
+    {
+      "id": "C6",
+      "label": "Séparation routes / controllers / services",
+      "points": 7,
+      "category": "architecture",
+      "mandatory": false,
+      "hints": ["routes/", "controllers/", "services/"]
+    },
+    {
+      "id": "C7",
+      "label": "Gestion des erreurs centralisée (middleware d'erreur Express)",
+      "points": 5,
+      "category": "qualité",
+      "mandatory": false,
+      "hints": ["errorHandler", "app.use.*err", "next(err)"]
+    },
+    {
+      "id": "C8",
+      "label": "Variables d'environnement utilisées (.env + dotenv)",
+      "points": 5,
+      "category": "sécurité",
+      "mandatory": false,
+      "hints": [".env", "dotenv", "process.env"]
+    }
+  ]
+}

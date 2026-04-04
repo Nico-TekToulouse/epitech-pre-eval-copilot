@@ -1,0 +1,57 @@
+name: epitech-pre-eval
+description: >
+  Pré-évalue automatiquement un projet étudiant Epitech à partir d'un barème JSON et du code source.
+  Génère un compte rendu rapide, un rapport détaillé critère par critère, et un fichier Excel exportable.
+  Utiliser ce skill dès que l'utilisateur mentionne : "pré-évaluation", "barème", "corriger un projet
+  étudiant", "vérifier les critères", "noter un rendu", "EIP", "regarde si l'étudiant a bien fait X",
+  "vérifie que le projet respecte le barème", "prépare mon évaluation", "analyse de code Epitech".
+
+version: 1.0.0
+author: Nicolas Moreau
+location: user
+
+triggers:
+  - pré-évaluation
+  - barème
+  - corriger un projet étudiant
+  - vérifier les critères
+  - noter un rendu
+  - EIP
+  - prépare mon évaluation
+  - analyse de code Epitech
+  - regarde si l'étudiant a bien fait
+  - vérifie que le projet respecte
+  - pré-eval
+
+dependencies:
+  - bash
+  - python3
+  - git
+  - unzip
+
+capabilities:
+  - Barème JSON parsing (multi-format)
+  - Criterion-by-criterion code analysis
+  - Bad practice detection (TS/JS, Java, C/C++, Python)
+  - Language auto-detection
+  - Quick summary generation
+  - Detailed Markdown report
+  - Excel report generation (openpyxl)
+
+outputs:
+  - type: markdown
+    description: Compte rendu rapide + rapport détaillé dans le chat
+  - type: excel
+    description: Fichier .xlsx avec onglets Résultats, Mauvaises pratiques, Récapitulatif
+  - type: markdown-file
+    description: Fichier .md téléchargeable du rapport complet
+
+tags:
+  - education
+  - epitech
+  - evaluation
+  - code-analysis
+  - student-eval
+  - pedagogy
+  - reporting
+  - bareme
