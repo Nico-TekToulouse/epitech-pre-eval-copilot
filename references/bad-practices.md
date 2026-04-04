@@ -150,3 +150,67 @@ grep -rn "password\s*=\|api_key\s*=\|secret\s*=\|JWT_SECRET\s*=" /tmp/student-pr
 | CORS `*` ouvert | 🟡 Moyen | `grep -rn "origin.*\*\|Access-Control.*\*"` |
 | JWT secret faible/en dur | 🔴 Critique | `grep -rn "jwt.*secret\|JWT_SECRET"` dans le code |
 | Pas de rate limiting | 🟡 Moyen | Absence de middleware limiteur |
+
+---
+
+## C# (.NET)
+
+| Pattern | Sévérité | Détection |
+|---------|----------|-----------|
+| `Console.WriteLine` de debug laissé | 🟢 Mineur | `grep -rn "Console\.WriteLine"` |
+| Catch vide ou `catch (Exception)` trop large | 🟡 Moyen | `grep -Przn "catch\s*\(\s*Exception\s*\)|catch\s*\{\s*\}"` |
+| Chaînes de connexion en dur | 🔴 Critique | `grep -rn "ConnectionString\s*=\s*\""` |
+| Pas de `using` pour les ressources IDisposable | 🟡 Moyen | `new SqlConnection` sans `using` |
+| `async void` (hors event handlers) | 🔴 Critique | `grep -rn "async void"` |
+| Magic strings sans constante | 🟡 Moyen | Chaînes littérales répétées dans la logique métier |
+| Accès direct aux champs publics | 🟡 Moyen | `grep -rn "public [A-Z][a-z]* [a-z]"` dans les modèles |
+
+---
+
+## Kotlin
+
+| Pattern | Sévérité | Détection |
+|---------|----------|-----------|
+| `!!` (null assertion) non justifié | 🟡 Moyen | `grep -rn "!!"` |
+| `lateinit var` sans vérification | 🟡 Moyen | `grep -rn "lateinit var"` |
+| `println` de debug laissé | 🟢 Mineur | `grep -rn "println("` |
+| Catch vide ou trop large | 🟡 Moyen | `grep -rn "catch (e: Exception)"` sans log |
+| Coroutine leak (sans `SupervisorJob`) | 🔴 Critique | `CoroutineScope` sans gestion d'annulation |
+| Secrets en dur dans les fichiers Kotlin | 🔴 Critique | `grep -Ern "val.*=.*\"[A-Za-z0-9+/]{20}"` |
+
+---
+
+## PHP
+
+| Pattern | Sévérité | Détection |
+|---------|----------|-----------|
+| SQL par concaténation (injection) | 🔴 Critique | `grep -rn "query.*\\\$_"` ou `"SELECT.*\\."`  |
+| `$_GET`/`$_POST` non validés | 🔴 Critique | `grep -rn "\\\$_GET\|\\\$_POST"` sans `filter_input` |
+| `echo $_` direct (XSS) | 🔴 Critique | `grep -rn "echo \\\$_"` |
+| `error_reporting(0)` en prod | 🟡 Moyen | `grep -rn "error_reporting(0)"` |
+| Mots de passe en clair (pas de bcrypt) | 🔴 Critique | `grep -rn "md5\|sha1"` sur des mots de passe |
+| `var_dump` / `print_r` de debug | 🟢 Mineur | `grep -rn "var_dump\|print_r"` |
+| Inclusion dynamique non sécurisée | 🔴 Critique | `include \$_GET` ou `require \$_POST` |
+
+---
+
+## Bash / Shell
+
+| Pattern | Sévérité | Détection |
+|---------|----------|-----------|
+| Absence de `set -euo pipefail` | 🟡 Moyen | Scripts sans ces options de sécurité en en-tête |
+| Variables non quotées (`$VAR` vs `"$VAR"`) | 🟡 Moyen | `grep -rn "\$[A-Z_]*[^"]"` — risque word splitting |
+| `eval` avec des données externes | 🔴 Critique | `grep -rnw "eval"` |
+| Absence de vérification du code de retour | 🟡 Moyen | Commandes critiques sans `|| exit 1` ou `if` |
+| Credentials en dur dans les scripts | 🔴 Critique | `grep -rn "PASSWORD=\|TOKEN=\|SECRET="` |
+| Fichiers temporaires sans `trap` de nettoyage | 🟡 Moyen | `mktemp` sans `trap ... EXIT` |
+
+---
+
+## Langages non couverts
+
+Si le langage principal du projet n'est pas listé ci-dessus, afficher l'avertissement suivant dans le rapport :
+
+> ⚠️ **Aucune bad practice détectée pour le langage `[LANGAGE]` (non couvert).**
+> L'absence de détection ne signifie **pas** l'absence de problèmes.
+> Une revue manuelle du code est fortement recommandée.

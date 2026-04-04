@@ -77,6 +77,11 @@ find /tmp/student-project -type f | grep -oE '\.[a-zA-Z]+$' | sort | uniq -c | s
 
 → Adapter les commandes d'analyse et la référence bad-practices au langage détecté.
 
+**Langages couverts par la référence bad-practices :** TypeScript/JavaScript, Java, C/C++, Python, Go, Rust, C#, Kotlin, PHP, Bash.
+
+> ⚠️ **Si le langage détecté n'est pas dans cette liste**, afficher dans le rapport :
+> `⚠️ Aucune bad practice détectée pour le langage [LANGAGE] (non couvert). L'absence de détection ne signifie pas absence de problèmes. Une revue manuelle du code est fortement recommandée.`
+
 **Cas limites :**
 | Situation | Comportement |
 |-----------|-------------|
