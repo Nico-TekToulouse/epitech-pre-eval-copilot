@@ -61,3 +61,19 @@ epitech-pre-eval-copilot/
     bareme-schema.md    # Variantes de format JSON barème
     example-bareme.json # Exemple de barème complet
 ```
+
+## ⚠️ Limites
+
+Ce skill est un outil de **pré-évaluation assistée**, pas un correcteur automatique. Il a des limites importantes à connaître avant utilisation :
+
+| Limite | Description |
+|--------|-------------|
+| **Pattern matching uniquement** | Le skill détecte des patterns textuels dans le code, il ne compile ni n'exécute le projet. Un pattern trouvé ≠ fonctionnalité fonctionnelle. |
+| **Score non fiable seul** | La fourchette estimée est indicative (±15 pts). Ne jamais l'utiliser comme note finale sans vérification manuelle. |
+| **Tests non exécutés** | Les tests détectés ne sont pas lancés. Un fichier de test peut exister sans passer. |
+| **Dépendances confondues avec le code** | Un pattern dans `node_modules` ou `vendor` peut être comptabilisé. Niveau de confiance `Low` dans ce cas. |
+| **Langages partiellement couverts** | C#, Kotlin, PHP, Bash ont une couverture de base. Les langages non listés reçoivent un avertissement explicite. |
+| **Projets sans structure standard** | Les projets mono-fichier, notebooks Jupyter, ou projets embarqués peuvent donner des résultats imprécis. |
+| **Code obfusqué ou minifié** | Les fichiers minifiés ou obfusqués ne sont pas analysables par pattern matching. |
+
+> **Règle d'or** : utiliser ce rapport comme point de départ pour l'évaluation, jamais comme point d'arrivée. Toujours compléter avec une vérification manuelle et un échange avec l'étudiant.

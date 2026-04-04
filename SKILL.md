@@ -296,6 +296,22 @@ python3 scripts/generate_report.py \
 4. Sauvegarder le rapport Markdown dans un fichier `pre-eval-[projet]-[date].md`
 5. Proposer d'approfondir un critère spécifique si demandé
 
+**Inclure obligatoirement à la fin du rapport Markdown la checklist suivante :**
+
+```markdown
+---
+
+## ✅ Checklist avant de noter
+
+> ⚠️ Ce rapport est une pré-évaluation automatique. Ne pas l'utiliser comme note finale sans vérification.
+
+- [ ] Tester l'exécution du projet (`npm start`, `make`, `python main.py`, etc.)
+- [ ] Vérifier manuellement les critères 🚫 BLOQUANTS
+- [ ] Lire au moins 3 fichiers source clés
+- [ ] Demander à l'étudiant d'expliquer une partie de son code
+- [ ] Ne pas utiliser la fourchette estimée comme note finale
+```
+
 ---
 
 ## Notes importantes
