@@ -261,7 +261,7 @@ if (!token) return res.status(401).json({ error: 'Unauthorized' });
 | 🚫 **BLOQUANT** | Direct et urgent : "Ce critère est bloquant. Sans cette correction, le projet ne peut pas être validé." |
 | ❌ **NON VALIDÉ** | Factuel et constructif : "La fonctionnalité X est absente. Voici comment l'implémenter..." |
 | ⚠️ **PARTIEL** | Encourageant et précis : "La base est là, mais il manque Y. Une petite modification suffit..." |
-| ✅ **VALIDÉ** | Confirmatif et bref : "Implémentation correcte détectée dans `fichier`. Vérifier manuellement si confiance Low." |
+| ✅ **VALIDÉ** | Confirmatif et bref : "Implémentation correcte détectée dans `fichier`. Vérifier manuellement si confiance faible." |
 
 **Exemple de recommandations structurées :**
 
