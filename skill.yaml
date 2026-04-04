@@ -32,11 +32,20 @@ dependencies:
 capabilities:
   - Barème JSON parsing (multi-format)
   - Criterion-by-criterion code analysis
-  - Bad practice detection (TS/JS, Java, C/C++, Python)
+  - Bad practice detection (TS/JS, Java, C/C++, Python, Go, Rust)
   - Language auto-detection
+  - Student level calibration (B1/B2/B3/EIP)
   - Quick summary generation
   - Detailed Markdown report
   - Excel report generation (openpyxl)
+
+parameters:
+  student_level:
+    type: string
+    description: "Niveau de l'étudiant pour calibrer la sévérité des bad practices"
+    values: ["B1", "B2", "B3", "EIP"]
+    required: false
+    default: "B2"
 
 outputs:
   - type: markdown
