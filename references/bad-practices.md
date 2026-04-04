@@ -176,7 +176,7 @@ grep -rn "password\s*=\|api_key\s*=\|secret\s*=\|JWT_SECRET\s*=" /tmp/student-pr
 | `println` de debug laissé | 🟢 Mineur | `grep -rn "println("` |
 | Catch vide ou trop large | 🟡 Moyen | `grep -rn "catch (e: Exception)"` sans log |
 | Coroutine leak (sans `SupervisorJob`) | 🔴 Critique | `CoroutineScope` sans gestion d'annulation |
-| Secrets en dur dans les fichiers Kotlin | 🔴 Critique | `grep -rn "val.*=.*\"[A-Za-z0-9+/]{20}"` |
+| Secrets en dur dans les fichiers Kotlin | 🔴 Critique | `grep -Ern "val.*=.*\"[A-Za-z0-9+/]{20}"` |
 
 ---
 
