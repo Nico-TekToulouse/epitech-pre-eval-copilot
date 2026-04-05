@@ -7,9 +7,7 @@ Pré-évalue automatiquement un projet étudiant Epitech à partir d'un **barèm
 
 ## ⚡ Installation rapide
 
-```bash
-npx skills add Nico-TekToulouse/epitech-pre-eval-copilot -g -a github-copilot
-```
+Utilisez la section [Installation](#installation) ci-dessous pour la commande `npx skills add` recommandée.
 
 ## Ce que ce skill produit
 
