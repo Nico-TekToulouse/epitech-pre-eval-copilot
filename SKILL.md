@@ -317,6 +317,17 @@ python3 scripts/generate_report.py \
 
 ---
 
+## Limites
+
+> ⚠️ Ce skill produit une **pré-évaluation indicative**, pas une note officielle.
+
+- L'analyse repose sur une lecture statique du code : elle ne remplace pas l'exécution réelle du projet.
+- Certains critères qualitatifs (lisibilité, pertinence pédagogique) nécessitent un jugement humain.
+- Le score estimé peut s'écarter du résultat réel selon le barème utilisé et le contexte de l'évaluation.
+- Toujours mentionner ce caractère indicatif à l'utilisateur avant de partager le rapport.
+
+---
+
 ## Notes importantes
 
 - **Ne pas noter à la place de l'enseignant** : toujours rappeler que c'est une pré-évaluation.
