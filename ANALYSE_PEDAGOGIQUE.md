@@ -1,4 +1,4 @@
-# 📚 Analyse Pédagogique — `epitech-pre-eval-copilot`
+# 📚 Analyse Pédagogique — `epitech-pre-eval`
 
 > Rapport rédigé suite à une analyse critique du skill du point de vue pédagogique.  
 > Date : 2026-04-04
