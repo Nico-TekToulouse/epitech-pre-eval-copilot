@@ -8,7 +8,7 @@
 - GitHub Copilot CLI installé et configuré
 
 ```bash
-npx skills add Nico-TekToulouse/epitech-pre-eval-copilot -g -a github-copilot
+npx skills add Nico-TekToulouse/epitech-pre-eval -g -a github-copilot
 ```
 
 ## Méthode manuelle — Prérequis
@@ -28,13 +28,13 @@ pip install openpyxl
 
 ```bash
 # Depuis le répertoire parent du skill
-gh copilot skill install ./epitech-pre-eval-copilot
+gh copilot skill install ./epitech-pre-eval
 ```
 
 Ou copier manuellement le dossier dans votre répertoire de skills Copilot :
 
 ```bash
-cp -r epitech-pre-eval-copilot ~/.config/gh-copilot/skills/
+cp -r epitech-pre-eval ~/.config/gh-copilot/skills/
 ```
 
 ## 3. Vérifier l'installation

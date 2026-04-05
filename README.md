@@ -1,6 +1,6 @@
 # epitech-pre-eval — Skill GitHub Copilot CLI
 
-[![Install with skills CLI](https://img.shields.io/badge/skills.sh-install-blue?logo=github)](https://skills.sh/Nico-TekToulouse/epitech-pre-eval-copilot)
+[![Install with skills CLI](https://img.shields.io/badge/skills.sh-install-blue?logo=github)](https://skills.sh/Nico-TekToulouse/epitech-pre-eval)
 [![Agent Skills](https://img.shields.io/badge/agent--skills-compatible-green)](https://github.com/vercel-labs/skills)
 
 Pré-évalue automatiquement un projet étudiant Epitech à partir d'un **barème JSON** et du **code source** fourni.
@@ -8,7 +8,7 @@ Pré-évalue automatiquement un projet étudiant Epitech à partir d'un **barèm
 ## ⚡ Installation rapide
 
 ```bash
-npx skills add Nico-TekToulouse/epitech-pre-eval-copilot -g -a github-copilot
+npx skills add Nico-TekToulouse/epitech-pre-eval -g -a github-copilot
 ```
 
 > Prérequis : **Node.js** et **npm** (qui fournit `npx`) doivent être installés. Voir https://nodejs.org/ si nécessaire.
@@ -48,7 +48,7 @@ TypeScript · JavaScript · Java · C · C++ · Python · Go · Rust
 > Prérequis : **Node.js** et **npm** (qui fournit `npx`) doivent être installés. Voir https://nodejs.org/ si nécessaire.
 >
 > ```bash
-> npx skills add Nico-TekToulouse/epitech-pre-eval-copilot -g -a github-copilot
+> npx skills add Nico-TekToulouse/epitech-pre-eval -g -a github-copilot
 > ```
 
 Voir [INSTALL.md](INSTALL.md) pour les autres méthodes d'installation.
@@ -67,7 +67,7 @@ Voir [EXAMPLE_PROMPT.md](EXAMPLE_PROMPT.md).
 ## Structure du projet
 
 ```
-epitech-pre-eval-copilot/
+epitech-pre-eval/
   SKILL.md              # Instructions du skill pour l'agent
   skill.yaml            # Métadonnées (triggers, outputs, deps)
   README.md             # Ce fichier
