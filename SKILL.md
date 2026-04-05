@@ -7,7 +7,10 @@ description: >
   "pré-évaluation", "barème", "corriger un projet étudiant", "vérifier les critères", "noter un rendu",
   "EIP", "regarde si l'étudiant a bien fait X", "vérifie que le projet respecte le barème",
   "prépare mon évaluation", "analyse de code Epitech".
-location: user
+metadata:
+  author: Nicolas Moreau
+  version: "1.0.0"
+  location: user
 ---
 
 # Epitech Pre-Eval Skill
