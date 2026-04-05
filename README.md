@@ -1,6 +1,17 @@
 # epitech-pre-eval — Skill GitHub Copilot CLI
 
+[![Install with skills CLI](https://img.shields.io/badge/skills.sh-install-blue?logo=github)](https://skills.sh/Nico-TekToulouse/epitech-pre-eval-copilot)
+[![Agent Skills](https://img.shields.io/badge/agent--skills-compatible-green)](https://github.com/vercel-labs/skills)
+
 Pré-évalue automatiquement un projet étudiant Epitech à partir d'un **barème JSON** et du **code source** fourni.
+
+## ⚡ Installation rapide
+
+```bash
+npx skills add Nico-TekToulouse/epitech-pre-eval-copilot -g -a github-copilot
+```
+
+> Prérequis : **Node.js** et **npm** (qui fournit `npx`) doivent être installés. Voir https://nodejs.org/ si nécessaire.
 
 ## Ce que ce skill produit
 
@@ -32,7 +43,15 @@ TypeScript · JavaScript · Java · C · C++ · Python · Go · Rust
 
 ## Installation
 
-Voir [INSTALL.md](INSTALL.md).
+> Installation via la commande `npx skills` (recommandée) :
+>
+> Prérequis : **Node.js** et **npm** (qui fournit `npx`) doivent être installés. Voir https://nodejs.org/ si nécessaire.
+>
+> ```bash
+> npx skills add Nico-TekToulouse/epitech-pre-eval-copilot -g -a github-copilot
+> ```
+
+Voir [INSTALL.md](INSTALL.md) pour les autres méthodes d'installation.
 
 ## Exemples de prompts
 
