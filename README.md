@@ -7,7 +7,11 @@ Pré-évalue automatiquement un projet étudiant Epitech à partir d'un **barèm
 
 ## ⚡ Installation rapide
 
-Utilisez la section [Installation](#installation) ci-dessous pour la commande `npx skills add` recommandée.
+```bash
+npx skills add Nico-TekToulouse/epitech-pre-eval-copilot -g -a github-copilot
+```
+
+> Prérequis : **Node.js** et **npm** (qui fournit `npx`) doivent être installés. Voir https://nodejs.org/ si nécessaire.
 
 ## Ce que ce skill produit
 
@@ -40,6 +44,8 @@ TypeScript · JavaScript · Java · C · C++ · Python · Go · Rust
 ## Installation
 
 > Installation via la commande `npx skills` (recommandée) :
+>
+> Prérequis : **Node.js** et **npm** (qui fournit `npx`) doivent être installés. Voir https://nodejs.org/ si nécessaire.
 >
 > ```bash
 > npx skills add Nico-TekToulouse/epitech-pre-eval-copilot -g -a github-copilot

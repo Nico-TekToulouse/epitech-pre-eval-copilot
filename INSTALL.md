@@ -2,6 +2,11 @@
 
 ## Méthode recommandée — `npx skills`
 
+### Prérequis
+
+- Node.js et npm installés (nécessaires pour utiliser `npx`)
+- GitHub Copilot CLI installé et configuré
+
 ```bash
 npx skills add Nico-TekToulouse/epitech-pre-eval-copilot -g -a github-copilot
 ```
