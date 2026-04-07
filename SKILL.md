@@ -99,10 +99,10 @@ Afficher un message de confirmation :
 
 | Erreur | Message à afficher | Action |
 |--------|-------------------|--------|
-| **403 / SAML enforcement** | `⚠️ Impossible d'accéder à github.com/Epitech/{code} : autorisation SAML requise.` | Demander à l'utilisateur de fournir le barème manuellement |
-| **404 / Repo introuvable** | `⚠️ Le repo Epitech/{code} n'existe pas ou n'est pas accessible.` | Demander à l'utilisateur de vérifier le code ou fournir le barème |
-| **Aucun fichier barème trouvé** | `⚠️ Aucun fichier barème trouvé dans Epitech/{code} (bareme.json, grading.json…).` | Demander à l'utilisateur de fournir le barème |
-| **JSON malformé** | `⚠️ Le fichier {fichier} dans Epitech/{code} n'est pas un JSON valide.` | Demander un barème alternatif |
+| **403 / SAML enforcement** | `⚠️ Impossible d'accéder à github.com/Epitech/{instance_code} : autorisation SAML requise.` | Demander à l'utilisateur de fournir le barème manuellement |
+| **404 / Repo introuvable** | `⚠️ Le repo Epitech/{instance_code} n'existe pas ou n'est pas accessible.` | Demander à l'utilisateur de vérifier le code ou fournir le barème |
+| **Aucun fichier barème trouvé** | `⚠️ Aucun fichier barème trouvé dans Epitech/{instance_code} (bareme.json, grading.json…).` | Demander à l'utilisateur de fournir le barème |
+| **JSON malformé** | `⚠️ Le fichier {fichier} dans Epitech/{instance_code} n'est pas un JSON valide.` | Demander un barème alternatif |
 
 > Dans tous les cas d'échec, utiliser `ask_user` pour demander le barème manuellement : fichier JSON uploadé, collé dans le chat, ou chemin local.
 
