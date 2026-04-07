@@ -43,7 +43,7 @@ capabilities:
 parameters:
   instance_code:
     type: string
-    description: "Code d'instance du projet Epitech (ex: B-CPP-500, T-WEB-600) pour récupérer automatiquement le barème depuis github.com/Epitech/{code}"
+    description: "Code d'instance du projet Epitech (ex: B-CPP-500, T-WEB-600) pour récupérer automatiquement le barème depuis github.com/Epitech/{instance_code}"
     required: false
   student_level:
     type: string
