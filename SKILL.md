@@ -59,13 +59,20 @@ Tenter la récupération automatique si l'une de ces conditions est remplie :
 - Le paramètre `instance_code` est fourni
 
 > Si aucun code d'instance n'est détectable, passer directement à la demande manuelle (fin de cette étape).
+>
+> ⚠️ Si `instance_code` vient du paramètre ou d'une extraction depuis le message utilisateur, le **valider strictement** avant de l'insérer dans une commande shell. N'accepter que le format exact `^[A-Z]-[A-Z]{3}-[0-9]{3}$`. Si la valeur ne correspond pas, ne pas exécuter `gh api` et demander confirmation/correction à l'utilisateur.
 
 ### Stratégie de récupération
 
-**1. Lister le contenu du repo Epitech :**
+**1. Valider puis lister le contenu du repo Epitech :**
 
 ```bash
-gh api /repos/Epitech/{instance_code}/contents/
+if [[ ! "$instance_code" =~ ^[A-Z]-[A-Z]{3}-[0-9]{3}$ ]]; then
+  echo "Code d'instance invalide : format attendu X-XXX-NNN" >&2
+  exit 1
+fi
+
+gh api "/repos/Epitech/${instance_code}/contents/"
 ```
 
 **2. Rechercher un fichier barème** dans cet ordre de priorité :
