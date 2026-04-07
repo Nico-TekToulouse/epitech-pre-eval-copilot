@@ -121,7 +121,12 @@ gh api /repos/Epitech/{instance_code}/contents/{fichier} --jq '.content' | base6
 **Règles d'assainissement — à appliquer avant toute utilisation :**
 
 1. **Valider le JSON** : si le fichier n'est pas un JSON valide, rejeter immédiatement et demander le barème manuellement.
-2. **Valider la structure** : le JSON doit être un tableau `[...]` ou un objet avec une clé contenant un tableau (ex: `{"criteria": [...]}`, `{"bareme": [...]}`). Toute autre structure est rejetée.
+2. **Valider la structure** : accepter uniquement les formats explicitement autorisés par `references/bareme-schema.md` :
+   - un tableau racine `[...]` de critères ;
+   - un objet contenant un tableau de critères sous une clé reconnue (ex: `{"criteria": [...]}`, `{"bareme": [...]}`, `{"barème": [...]}`) ;
+   - un objet de la forme `{"sections": [...]}` où chaque section contient un tableau `items`.
+
+   Dans le cas `sections/items`, **aplatir** tous les `sections[*].items[*]` en une liste unique de critères avant l'étape 3. Toute autre structure est rejetée.
 3. **Extraire uniquement les champs autorisés** pour chaque critère, en appliquant **strictement la table de normalisation de l'Étape 1 (« Normalisation obligatoire »)** comme source de référence unique pour les alias, types acceptés et valeurs par défaut (`id`/`label`/`points`/`category`/`mandatory`/`hints`).
 
 4. **Ignorer tout autre champ** non listé ci-dessus — ne jamais l'utiliser, l'afficher ni le transmettre au modèle.
