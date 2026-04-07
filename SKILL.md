@@ -147,10 +147,10 @@ gh api /repos/Epitech/{instance_code}/contents/{fichier} --jq '.content' | base6
 | Erreur | Message à afficher | Action |
 |--------|-------------------|--------|
 | **Utilisateur refuse le fetch** | _(aucun message)_ | Demander le barème manuellement |
-| **403 / SAML enforcement** | `⚠️ Impossible d'accéder à github.com/Epitech/{code} : autorisation SAML requise.` | Demander à l'utilisateur de fournir le barème manuellement |
-| **404 / Repo introuvable** | `⚠️ Le repo Epitech/{code} n'existe pas ou n'est pas accessible.` | Demander à l'utilisateur de vérifier le code ou fournir le barème |
-| **Aucun fichier barème trouvé** | `⚠️ Aucun fichier barème trouvé dans Epitech/{code} (bareme.json, grading.json…).` | Demander à l'utilisateur de fournir le barème |
-| **JSON malformé** | `⚠️ Le fichier {fichier} dans Epitech/{code} n'est pas un JSON valide.` | Demander un barème alternatif |
+| **403 / SAML enforcement** | `⚠️ Impossible d'accéder à github.com/Epitech/{instance_code} : autorisation SAML requise.` | Demander à l'utilisateur de fournir le barème manuellement |
+| **404 / Repo introuvable** | `⚠️ Le repo Epitech/{instance_code} n'existe pas ou n'est pas accessible.` | Demander à l'utilisateur de vérifier le code ou fournir le barème |
+| **Aucun fichier barème trouvé** | `⚠️ Aucun fichier barème trouvé dans Epitech/{instance_code} (bareme.json, grading.json…).` | Demander à l'utilisateur de fournir le barème |
+| **JSON malformé** | `⚠️ Le fichier {fichier} dans Epitech/{instance_code} n'est pas un JSON valide.` | Demander un barème alternatif |
 | **Structure JSON invalide** | `⚠️ Le fichier {fichier} n'a pas la structure attendue (tableau de critères).` | Demander un barème alternatif |
 | **Contenu suspect détecté** | `⚠️ Des contenus suspects ont été détectés dans le barème (voir détail). Les critères concernés ont été ignorés.` | Continuer avec les critères sains uniquement |
 
