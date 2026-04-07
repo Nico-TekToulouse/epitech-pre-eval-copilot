@@ -137,7 +137,6 @@ gh api /repos/Epitech/{instance_code}/contents/{fichier} --jq '.content' | base6
 ```
 ✅ Barème récupéré depuis github.com/Epitech/{instance_code} ({fichier})
    → {N} critères retenus | {M} critères rejetés (champs invalides ou suspects)
-   → Champs non reconnus ignorés : {liste si présents}
 ⚠️ Source externe non vérifiée — valider le barème visuellement avant de finaliser l'évaluation.
 ```
 
