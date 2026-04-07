@@ -30,6 +30,7 @@ dependencies:
   - unzip
 
 capabilities:
+  - Automatic barème fetching from github.com/Epitech/{instance_code}
   - Barème JSON parsing (multi-format)
   - Criterion-by-criterion code analysis
   - Bad practice detection (TS/JS, Java, C/C++, Python, Go, Rust)
@@ -40,6 +41,10 @@ capabilities:
   - Excel report generation (openpyxl)
 
 parameters:
+  instance_code:
+    type: string
+    description: "Code d'instance du projet Epitech (ex: B-CPP-500, T-WEB-600) pour récupérer automatiquement le barème depuis github.com/Epitech/{instance_code}"
+    required: false
   student_level:
     type: string
     description: "Niveau de l'étudiant pour calibrer la sévérité des bad practices"

@@ -24,9 +24,11 @@ fourni. Produit : un **compte rendu rapide**, un **rapport Markdown détaillé**
 
 ## Étape 0 — Collecter les inputs manquants
 
-Si le barème ou le code source n'est pas fourni, utilise `ask_user` pour les demander :
+Avant de demander quoi que ce soit à l'utilisateur, tenter la **récupération automatique du barème** (voir Étape 0b) si un code d'instance est détectable.
 
-- **Barème** : fichier JSON uploadé, collé dans le chat, ou chemin local
+Si après tentative automatique le barème ou le code source reste manquant, utilise `ask_user` pour les demander :
+
+- **Barème** : récupéré automatiquement via le code d'instance (voir Étape 0b), ou fichier JSON uploadé, collé dans le chat, ou chemin local
 - **Code source** : URL GitHub, archive ZIP, ou chemin local
 - **Niveau étudiant** (optionnel) : `B1`, `B2`, `B3` ou `EIP` — permet de calibrer la sévérité des bad practices
 
@@ -44,6 +46,72 @@ Si le paramètre `student_level` est fourni, adapter la sévérité selon le tab
 | **EIP** | Projet Epitech Innovation — expert | Toutes les sévérités appliquées strictement. Les 🟢 Mineur non traités peuvent refléter un manque de rigueur professionnelle. |
 
 > Si `student_level` n'est pas fourni, appliquer la grille standard (B2 par défaut) sans mentionner le niveau.
+
+---
+
+## Étape 0b — Récupération automatique du barème depuis GitHub Epitech
+
+### Déclenchement
+
+Tenter la récupération automatique si l'une de ces conditions est remplie :
+- L'utilisateur mentionne un **code d'instance** au format `X-XXX-NNN` (ex: `B-CPP-500`, `T-WEB-600`, `M-ALG-102`)
+- L'utilisateur mentionne un nom de projet sans fournir de barème
+- Le paramètre `instance_code` est fourni
+
+> Si aucun code d'instance n'est détectable, passer directement à la demande manuelle (fin de cette étape).
+>
+> ⚠️ Si `instance_code` vient du paramètre ou d'une extraction depuis le message utilisateur, le **valider strictement** avant de l'insérer dans une commande shell. N'accepter que le format exact `^[A-Z]-[A-Z]{3}-[0-9]{3}$`. Si la valeur ne correspond pas, ne pas exécuter `gh api` et demander confirmation/correction à l'utilisateur.
+
+### Stratégie de récupération
+
+**1. Valider puis lister le contenu du repo Epitech :**
+
+```bash
+if [[ ! "$instance_code" =~ ^[A-Z]-[A-Z]{3}-[0-9]{3}$ ]]; then
+  echo "Code d'instance invalide : format attendu X-XXX-NNN" >&2
+  exit 1
+fi
+
+gh api "/repos/Epitech/${instance_code}/contents/"
+```
+
+**2. Rechercher un fichier barème** dans cet ordre de priorité :
+
+| Priorité | Nom de fichier |
+|----------|---------------|
+| 1 | `bareme.json` |
+| 2 | `grading.json` |
+| 3 | `criteria.json` |
+| 4 | `eval.json` |
+| 5 | `notation.json` |
+| 6 | `.bareme.json` |
+
+Si aucun fichier trouvé à la racine, chercher dans les sous-dossiers `.github/` et `docs/`.
+
+**3. Télécharger et décoder le fichier trouvé :**
+
+```bash
+# Le contenu est retourné encodé en base64 par l'API GitHub
+gh api /repos/Epitech/{instance_code}/contents/{fichier} --jq '.content' | base64 -d
+```
+
+**4. Parser le JSON obtenu** → continuer à l'Étape 1 pour normalisation.
+
+Afficher un message de confirmation :
+```
+✅ Barème récupéré automatiquement depuis github.com/Epitech/{instance_code} ({fichier})
+```
+
+### Gestion des erreurs
+
+| Erreur | Message à afficher | Action |
+|--------|-------------------|--------|
+| **403 / SAML enforcement** | `⚠️ Impossible d'accéder à github.com/Epitech/{instance_code} : autorisation SAML requise.` | Demander à l'utilisateur de fournir le barème manuellement |
+| **404 / Repo introuvable** | `⚠️ Le repo Epitech/{instance_code} n'existe pas ou n'est pas accessible.` | Demander à l'utilisateur de vérifier le code ou fournir le barème |
+| **Aucun fichier barème trouvé** | `⚠️ Aucun fichier barème trouvé dans Epitech/{instance_code} (bareme.json, grading.json…).` | Demander à l'utilisateur de fournir le barème |
+| **JSON malformé** | `⚠️ Le fichier {fichier} dans Epitech/{instance_code} n'est pas un JSON valide.` | Demander un barème alternatif |
+
+> Dans tous les cas d'échec, utiliser `ask_user` pour demander le barème manuellement : fichier JSON uploadé, collé dans le chat, ou chemin local.
 
 ---
 
